@@ -10,31 +10,40 @@ import com.example.matule.domain.model.OnboardingPage
 class OnboardingQueue(
     private val pages: List<OnboardingPage>
 ) {
+    private var currentIndex: Int = 0
 
     /**
      * Purpose: Returns the page that should currently be visible.
      */
-    fun currentPage(): OnboardingPage = TODO("GREEN stage will return current onboarding page")
+    fun currentPage(): OnboardingPage {
+        return pages.getOrNull(currentIndex) ?: OnboardingPage(
+            imageResName = "",
+            title = "",
+            description = ""
+        )
+    }
 
     /**
      * Purpose: Moves the queue to the next page when possible.
      */
     fun moveToNext() {
-        TODO("GREEN stage will update current onboarding index")
+        if (currentIndex < pages.lastIndex) {
+            currentIndex++
+        }
     }
 
     /**
      * Purpose: Returns total amount of onboarding pages.
      */
-    fun count(): Int = TODO("GREEN stage will return onboarding pages count")
+    fun count(): Int = pages.size
 
     /**
      * Purpose: Reports whether the onboarding contains more than one page.
      */
-    fun hasMultiplePages(): Boolean = TODO("GREEN stage will check onboarding page amount")
+    fun hasMultiplePages(): Boolean = pages.size > 1
 
     /**
      * Purpose: Returns zero-based indicator position for the current page.
      */
-    fun currentIndicatorIndex(): Int = TODO("GREEN stage will return current indicator index")
+    fun currentIndicatorIndex(): Int = currentIndex
 }

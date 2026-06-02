@@ -30,6 +30,11 @@ class SignInValidator(
      * Purpose: Validates empty fields and email format.
      */
     fun validate(email: String, password: String): SignInValidationResult {
-        TODO("GREEN stage will implement sign-in validation")
+        return when {
+            email.isBlank() -> SignInValidationResult.Error("Email is required")
+            password.isBlank() -> SignInValidationResult.Error("Password is required")
+            !emailValidator.isValid(email) -> SignInValidationResult.Error("Email format is invalid")
+            else -> SignInValidationResult.Success
+        }
     }
 }
