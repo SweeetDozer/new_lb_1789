@@ -1,0 +1,9 @@
+<resources>
+    <dimen name="screen_padding">24dp</dimen>
+    <dimen name="field_height">58dp</dimen>
+    <dimen name="button_height">56dp</dimen>
+    <dimen name="corner_large">14dp</dimen>
+    <dimen name="dot_width">32dp</dimen>
+    <dimen name="dot_height">5dp</dimen>
+    <dimen name="dot_margin">6dp</dimen>
+</resources>

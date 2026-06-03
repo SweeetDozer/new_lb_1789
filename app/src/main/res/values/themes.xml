@@ -2,6 +2,7 @@
     <style name="Theme.Matule" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/matule_primary</item>
         <item name="colorPrimaryVariant">@color/matule_primary_dark</item>
+        <item name="colorOnPrimary">@color/matule_white</item>
         <item name="android:windowBackground">@color/matule_background</item>
     </style>
 </resources>

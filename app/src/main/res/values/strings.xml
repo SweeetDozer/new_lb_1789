@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">Matule</string>
+    <string name="onboarding_skip">Пропустить</string>
+    <string name="onboarding_start">Начать</string>
+    <string name="onboarding_next">Далее</string>
+    <string name="onboarding_sign_in">Войти</string>
+    <string name="onboarding_title_1">Добро пожаловать</string>
+    <string name="onboarding_description_1">Начнем путешествие</string>
+    <string name="onboarding_title_2">Начнем путешествие</string>
+    <string name="onboarding_description_2">Умная, великолепная и модная коллекция. Изучите сейчас</string>
+    <string name="onboarding_title_3">У вас есть сила, чтобы</string>
+    <string name="onboarding_description_3">В вашей комнате много красивых и привлекательных растений</string>
+    <string name="sign_in_title">Привет 👋</string>
+    <string name="sign_in_subtitle">Заполните свои данные или продолжите через социальные медиа</string>
+    <string name="sign_in_email_label">Email</string>
+    <string name="sign_in_email_hint">xyz@gmail.com</string>
+    <string name="sign_in_password_label">Пароль</string>
+    <string name="sign_in_password_hint">Введите пароль</string>
+    <string name="sign_in_button">Войти</string>
+    <string name="sign_in_forgot">Восстановить</string>
+    <string name="sign_in_bottom_text">Вы впервые? Создать пользователя</string>
+    <string name="validation_error_title">Ошибка</string>
+    <string name="dialog_ok">ОК</string>
+    <string name="mock_login_success">Вход выполнен в тестовом режиме</string>
+    <string name="feature_later">Экран будет добавлен позже</string>
+    <string name="home_title">Главная</string>
+    <string name="home_placeholder">Sprint 1 Home placeholder</string>
 </resources>
