@@ -14,6 +14,10 @@ class OtpValidator(
      * Purpose: Checks code length and equality with expected OTP.
      */
     fun validate(enteredOtp: String): Sprint2ValidationResult {
-        TODO("GREEN stage will implement OTP validation")
+        return when {
+            enteredOtp.length != otpLength -> Sprint2ValidationResult.Error("OTP length is invalid")
+            enteredOtp != expectedOtp -> Sprint2ValidationResult.Error("OTP is incorrect")
+            else -> Sprint2ValidationResult.Success
+        }
     }
 }

@@ -13,6 +13,6 @@ class CaptchaValidator(
      * Purpose: Checks user input against expected CAPTCHA text.
      */
     fun isValid(userInput: String): Boolean {
-        TODO("GREEN stage will implement CAPTCHA validation")
+        return userInput.equals(expectedCaptcha, ignoreCase = true)
     }
 }

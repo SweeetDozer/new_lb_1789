@@ -13,6 +13,10 @@ class ForgotPasswordValidator(
      * Purpose: Checks that email is filled and has valid format.
      */
     fun validate(email: String): Sprint2ValidationResult {
-        TODO("GREEN stage will implement forgot-password validation")
+        return when {
+            email.isBlank() -> Sprint2ValidationResult.Error("Email is required")
+            !emailValidator.isValid(email) -> Sprint2ValidationResult.Error("Email format is invalid")
+            else -> Sprint2ValidationResult.Success
+        }
     }
 }

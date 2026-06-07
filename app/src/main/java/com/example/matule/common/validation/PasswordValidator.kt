@@ -11,6 +11,14 @@ class PasswordValidator {
      * Purpose: Checks length, uppercase, lowercase, digit, and special character.
      */
     fun isValid(password: String): Boolean {
-        TODO("GREEN stage will implement password validation")
+        return password.length >= MIN_LENGTH &&
+            password.any { it in 'A'..'Z' } &&
+            password.any { it in 'a'..'z' } &&
+            password.any { it.isDigit() } &&
+            password.any { !it.isLetterOrDigit() }
+    }
+
+    private companion object {
+        const val MIN_LENGTH = 8
     }
 }

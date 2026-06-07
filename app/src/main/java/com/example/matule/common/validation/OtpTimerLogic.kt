@@ -8,18 +8,29 @@ package com.example.matule.common.validation
 class OtpTimerLogic(
     private val initialSeconds: Int = 10
 ) {
+    private var seconds: Int = initialSeconds
 
     /**
      * Purpose: Returns initial timer value in seconds.
      */
     fun currentSeconds(): Int {
-        TODO("GREEN stage will return current OTP timer seconds")
+        return seconds
     }
 
     /**
      * Purpose: Reports whether resend action is available for the provided second.
      */
     fun isResendAvailable(seconds: Int): Boolean {
-        TODO("GREEN stage will implement resend availability")
+        return seconds == 0
+    }
+
+    /**
+     * Purpose: Decreases timer by one second without going below zero.
+     */
+    fun tick(): Int {
+        if (seconds > 0) {
+            seconds--
+        }
+        return seconds
     }
 }

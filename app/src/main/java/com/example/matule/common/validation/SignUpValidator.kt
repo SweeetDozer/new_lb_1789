@@ -18,6 +18,13 @@ class SignUpValidator(
         password: String,
         isAgreementChecked: Boolean
     ): Sprint2ValidationResult {
-        TODO("GREEN stage will implement sign-up validation")
+        return when {
+            name.isBlank() -> Sprint2ValidationResult.Error("Name is required")
+            email.isBlank() -> Sprint2ValidationResult.Error("Email is required")
+            !emailValidator.isValid(email) -> Sprint2ValidationResult.Error("Email format is invalid")
+            password.isBlank() -> Sprint2ValidationResult.Error("Password is required")
+            !isAgreementChecked -> Sprint2ValidationResult.Error("Agreement is required")
+            else -> Sprint2ValidationResult.Success
+        }
     }
 }
