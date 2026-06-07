@@ -19,13 +19,46 @@ class UpdatePasswordValidator(
         captchaInput: String
     ): Sprint2ValidationResult {
         return when {
-            password.isBlank() -> Sprint2ValidationResult.Error("Password is required")
-            !passwordValidator.isValid(password) -> Sprint2ValidationResult.Error("Password is invalid")
-            repeatPassword.isBlank() -> Sprint2ValidationResult.Error("Repeat password is required")
-            repeatPassword != password -> Sprint2ValidationResult.Error("Passwords do not match")
-            captchaInput.isBlank() -> Sprint2ValidationResult.Error("Captcha is required")
-            !captchaValidator.isValid(captchaInput) -> Sprint2ValidationResult.Error("Captcha is invalid")
+            isPasswordEmpty(password) -> Sprint2ValidationResult.Error(PASSWORD_REQUIRED)
+            isPasswordInvalid(password) -> Sprint2ValidationResult.Error(PASSWORD_INVALID)
+            isRepeatPasswordEmpty(repeatPassword) -> Sprint2ValidationResult.Error(REPEAT_PASSWORD_REQUIRED)
+            arePasswordsDifferent(password, repeatPassword) -> Sprint2ValidationResult.Error(PASSWORDS_DO_NOT_MATCH)
+            isCaptchaEmpty(captchaInput) -> Sprint2ValidationResult.Error(CAPTCHA_REQUIRED)
+            isCaptchaInvalid(captchaInput) -> Sprint2ValidationResult.Error(CAPTCHA_INVALID)
             else -> Sprint2ValidationResult.Success
         }
+    }
+
+    private fun isPasswordEmpty(password: String): Boolean {
+        return password.isBlank()
+    }
+
+    private fun isPasswordInvalid(password: String): Boolean {
+        return !passwordValidator.isValid(password)
+    }
+
+    private fun isRepeatPasswordEmpty(repeatPassword: String): Boolean {
+        return repeatPassword.isBlank()
+    }
+
+    private fun arePasswordsDifferent(password: String, repeatPassword: String): Boolean {
+        return repeatPassword != password
+    }
+
+    private fun isCaptchaEmpty(captchaInput: String): Boolean {
+        return captchaInput.isBlank()
+    }
+
+    private fun isCaptchaInvalid(captchaInput: String): Boolean {
+        return !captchaValidator.isValid(captchaInput)
+    }
+
+    private companion object {
+        const val PASSWORD_REQUIRED = "Password is required"
+        const val PASSWORD_INVALID = "Password is invalid"
+        const val REPEAT_PASSWORD_REQUIRED = "Repeat password is required"
+        const val PASSWORDS_DO_NOT_MATCH = "Passwords do not match"
+        const val CAPTCHA_REQUIRED = "Captcha is required"
+        const val CAPTCHA_INVALID = "Captcha is invalid"
     }
 }

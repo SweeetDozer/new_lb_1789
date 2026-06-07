@@ -28,9 +28,7 @@ class OtpTimerLogic(
      * Purpose: Decreases timer by one second without going below zero.
      */
     fun tick(): Int {
-        if (seconds > 0) {
-            seconds--
-        }
+        seconds = (seconds - 1).coerceAtLeast(0)
         return seconds
     }
 }

@@ -15,9 +15,22 @@ class OtpValidator(
      */
     fun validate(enteredOtp: String): Sprint2ValidationResult {
         return when {
-            enteredOtp.length != otpLength -> Sprint2ValidationResult.Error("OTP length is invalid")
-            enteredOtp != expectedOtp -> Sprint2ValidationResult.Error("OTP is incorrect")
+            hasInvalidLength(enteredOtp) -> Sprint2ValidationResult.Error(OTP_LENGTH_INVALID)
+            isIncorrectOtp(enteredOtp) -> Sprint2ValidationResult.Error(OTP_INCORRECT)
             else -> Sprint2ValidationResult.Success
         }
+    }
+
+    private fun hasInvalidLength(enteredOtp: String): Boolean {
+        return enteredOtp.length != otpLength
+    }
+
+    private fun isIncorrectOtp(enteredOtp: String): Boolean {
+        return enteredOtp != expectedOtp
+    }
+
+    private companion object {
+        const val OTP_LENGTH_INVALID = "OTP length is invalid"
+        const val OTP_INCORRECT = "OTP is incorrect"
     }
 }

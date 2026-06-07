@@ -14,9 +14,22 @@ class ForgotPasswordValidator(
      */
     fun validate(email: String): Sprint2ValidationResult {
         return when {
-            email.isBlank() -> Sprint2ValidationResult.Error("Email is required")
-            !emailValidator.isValid(email) -> Sprint2ValidationResult.Error("Email format is invalid")
+            isEmailEmpty(email) -> Sprint2ValidationResult.Error(EMAIL_REQUIRED)
+            isEmailInvalid(email) -> Sprint2ValidationResult.Error(EMAIL_INVALID)
             else -> Sprint2ValidationResult.Success
         }
+    }
+
+    private fun isEmailEmpty(email: String): Boolean {
+        return email.isBlank()
+    }
+
+    private fun isEmailInvalid(email: String): Boolean {
+        return !emailValidator.isValid(email)
+    }
+
+    private companion object {
+        const val EMAIL_REQUIRED = "Email is required"
+        const val EMAIL_INVALID = "Email format is invalid"
     }
 }
