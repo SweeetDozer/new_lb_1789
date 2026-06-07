@@ -24,18 +24,17 @@ class ProductSwiperState(
      * Purpose: Moves selection to next product.
      */
     fun next() {
-        if (currentIndex < products.lastIndex) {
-            currentIndex++
+        if (products.isEmpty()) {
+            return
         }
+        currentIndex = (currentIndex + 1).coerceAtMost(products.lastIndex)
     }
 
     /**
      * Purpose: Moves selection to previous product.
      */
     fun previous() {
-        if (currentIndex > 0) {
-            currentIndex--
-        }
+        currentIndex = (currentIndex - 1).coerceAtLeast(FIRST_INDEX)
     }
 
     /**
@@ -43,5 +42,9 @@ class ProductSwiperState(
      */
     fun isHighlighted(index: Int): Boolean {
         return index == currentIndex
+    }
+
+    private companion object {
+        const val FIRST_INDEX = 0
     }
 }

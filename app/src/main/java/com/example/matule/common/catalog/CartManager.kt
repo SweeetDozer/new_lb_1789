@@ -15,11 +15,12 @@ class CartManager {
      * Purpose: Adds product to cart or increases quantity if it already exists.
      */
     fun add(product: Product) {
-        val currentItem = cartItems[product.id]
-        cartItems[product.id] = if (currentItem == null) {
-            CartItem(product = product, quantity = 1)
-        } else {
-            currentItem.copy(quantity = currentItem.quantity + 1)
+        updateQuantity(product.id) { currentItem ->
+            if (currentItem == null) {
+                CartItem(product = product, quantity = MIN_QUANTITY)
+            } else {
+                currentItem.copy(quantity = currentItem.quantity + 1)
+            }
         }
     }
 
@@ -27,17 +28,21 @@ class CartManager {
      * Purpose: Increases product quantity.
      */
     fun increase(productId: String) {
-        val currentItem = cartItems[productId] ?: return
-        cartItems[productId] = currentItem.copy(quantity = currentItem.quantity + 1)
+        updateQuantity(productId) { currentItem ->
+            currentItem?.copy(quantity = currentItem.quantity + 1)
+        }
     }
 
     /**
      * Purpose: Decreases product quantity without making it negative.
      */
     fun decrease(productId: String) {
-        val currentItem = cartItems[productId] ?: return
-        if (currentItem.quantity > MIN_QUANTITY) {
-            cartItems[productId] = currentItem.copy(quantity = currentItem.quantity - 1)
+        updateQuantity(productId) { currentItem ->
+            when {
+                currentItem == null -> null
+                currentItem.quantity > MIN_QUANTITY -> currentItem.copy(quantity = currentItem.quantity - 1)
+                else -> currentItem
+            }
         }
     }
 
@@ -60,6 +65,13 @@ class CartManager {
      */
     fun totalCount(): Int {
         return cartItems.values.sumOf { it.quantity }
+    }
+
+    private fun updateQuantity(productId: String, update: (CartItem?) -> CartItem?) {
+        val updatedItem = update(cartItems[productId])
+        if (updatedItem != null) {
+            cartItems[productId] = updatedItem
+        }
     }
 
     private companion object {

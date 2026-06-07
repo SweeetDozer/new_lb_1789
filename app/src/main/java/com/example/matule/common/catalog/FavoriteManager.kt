@@ -14,7 +14,7 @@ class FavoriteManager {
      * Purpose: Adds product to favorites.
      */
     fun add(product: Product) {
-        favorites[product.id] = product
+        favorites[productKey(product)] = product
     }
 
     /**
@@ -36,5 +36,9 @@ class FavoriteManager {
      */
     fun getFavorites(): List<Product> {
         return favorites.values.toList()
+    }
+
+    private fun productKey(product: Product): String {
+        return product.id
     }
 }

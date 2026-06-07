@@ -14,13 +14,15 @@ class ProductFilter {
      * Purpose: Returns products matching discount, price, color, and type filters.
      */
     fun filter(products: List<Product>, options: FilterOptions): List<Product> {
-        return products.filter { product ->
-            matchesDiscount(product, options) &&
-                matchesMinPrice(product, options) &&
-                matchesMaxPrice(product, options) &&
-                matchesColors(product, options) &&
-                matchesTypes(product, options)
-        }
+        return products.filter { product -> matchesProduct(product, options) }
+    }
+
+    private fun matchesProduct(product: Product, options: FilterOptions): Boolean {
+        return matchesDiscount(product, options) &&
+            matchesMinPrice(product, options) &&
+            matchesMaxPrice(product, options) &&
+            matchesColors(product, options) &&
+            matchesTypes(product, options)
     }
 
     private fun matchesDiscount(product: Product, options: FilterOptions): Boolean {

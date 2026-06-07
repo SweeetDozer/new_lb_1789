@@ -11,24 +11,37 @@ class PriceRangeValidator {
      * Purpose: Checks that min and max prices are empty or valid non-negative numbers.
      */
     fun validate(minPriceText: String, maxPriceText: String): PriceRangeValidationResult {
-        val minPrice = parsePrice(minPriceText)
-        val maxPrice = parsePrice(maxPriceText)
+        val minPrice = parseNullablePrice(minPriceText)
+        val maxPrice = parseNullablePrice(maxPriceText)
 
         return when {
-            minPriceText.isNotBlank() && minPrice == null -> PriceRangeValidationResult.Error("Invalid min price")
-            maxPriceText.isNotBlank() && maxPrice == null -> PriceRangeValidationResult.Error("Invalid max price")
-            minPrice != null && minPrice < 0 -> PriceRangeValidationResult.Error("Price cannot be negative")
-            maxPrice != null && maxPrice < 0 -> PriceRangeValidationResult.Error("Price cannot be negative")
-            minPrice != null && maxPrice != null && minPrice > maxPrice -> PriceRangeValidationResult.Error("Min price must be less than max price")
+            minPrice.isInvalid -> PriceRangeValidationResult.Error("Invalid min price")
+            maxPrice.isInvalid -> PriceRangeValidationResult.Error("Invalid max price")
+            minPrice.isNegative() || maxPrice.isNegative() -> PriceRangeValidationResult.Error("Price cannot be negative")
+            minPrice.isGreaterThan(maxPrice) -> PriceRangeValidationResult.Error("Min price must be less than max price")
             else -> PriceRangeValidationResult.Valid
         }
     }
 
-    private fun parsePrice(value: String): Double? {
+    private fun parseNullablePrice(value: String): ParsedPrice {
         return if (value.isBlank()) {
-            null
+            ParsedPrice(value = null, isInvalid = false)
         } else {
-            value.toDoubleOrNull()
+            val parsedValue = value.toDoubleOrNull()
+            ParsedPrice(value = parsedValue, isInvalid = parsedValue == null)
+        }
+    }
+
+    private data class ParsedPrice(
+        val value: Double?,
+        val isInvalid: Boolean
+    ) {
+        fun isNegative(): Boolean {
+            return value != null && value < 0
+        }
+
+        fun isGreaterThan(other: ParsedPrice): Boolean {
+            return value != null && other.value != null && value > other.value
         }
     }
 }

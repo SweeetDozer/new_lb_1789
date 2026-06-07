@@ -24,21 +24,25 @@ class ProductDescriptionState {
      * Purpose: Expands description.
      */
     fun expand() {
-        isExpanded = true
+        setExpanded(true)
     }
 
     /**
      * Purpose: Collapses description.
      */
     fun collapse() {
-        isExpanded = false
+        setExpanded(false)
     }
 
     /**
      * Purpose: Switches description between expanded and collapsed states.
      */
     fun toggle() {
-        isExpanded = !isExpanded
+        setExpanded(!isExpanded)
+    }
+
+    private fun setExpanded(expanded: Boolean) {
+        isExpanded = expanded
     }
 
     private companion object {
