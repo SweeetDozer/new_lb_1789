@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.matule.R
 import com.example.matule.common.validation.SignUpValidator
 import com.example.matule.common.validation.Sprint2ValidationResult
+import com.example.matule.presentation.common.KeyboardHelper
 import com.google.android.material.button.MaterialButton
 
 /**
@@ -90,7 +91,10 @@ class SignUpFragment : Fragment() {
 
         when (result) {
             is Sprint2ValidationResult.Error -> showErrorDialog(toRussianMessage(result.message))
-            Sprint2ValidationResult.Success -> findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
+            Sprint2ValidationResult.Success -> {
+                KeyboardHelper.hideKeyboard(this)
+                findNavController().navigate(R.id.action_signUpFragment_to_homeFragment)
+            }
         }
     }
 
@@ -106,6 +110,7 @@ class SignUpFragment : Fragment() {
 
     private fun showPrivacyPolicyDialog() {
         // TODO: replace with real PDF policy file if provided.
+        KeyboardHelper.hideKeyboard(this)
         AlertDialog.Builder(requireContext())
             .setTitle(R.string.privacy_policy_title)
             .setMessage(R.string.privacy_policy_message)
@@ -114,6 +119,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun showErrorDialog(message: String) {
+        KeyboardHelper.hideKeyboard(this)
         AlertDialog.Builder(requireContext())
             .setTitle(R.string.validation_error_title)
             .setMessage(message)

@@ -17,6 +17,7 @@ import com.example.matule.R
 import com.example.matule.common.validation.OtpTimerLogic
 import com.example.matule.common.validation.OtpValidator
 import com.example.matule.common.validation.Sprint2ValidationResult
+import com.example.matule.presentation.common.KeyboardHelper
 
 /**
  * Purpose: Shows Sprint 2 OTP verification screen with simple timer and local code check.
@@ -105,11 +106,15 @@ class OtpVerificationFragment : Fragment() {
     private fun validateOtp(otp: String) {
         when (otpValidator.validate(otp)) {
             is Sprint2ValidationResult.Error -> showOtpError()
-            Sprint2ValidationResult.Success -> findNavController().navigate(R.id.action_otpVerificationFragment_to_updatePasswordFragment)
+            Sprint2ValidationResult.Success -> {
+                KeyboardHelper.hideKeyboard(this)
+                findNavController().navigate(R.id.action_otpVerificationFragment_to_updatePasswordFragment)
+            }
         }
     }
 
     private fun showOtpError() {
+        KeyboardHelper.hideKeyboard(this)
         otpEditText.setBackgroundResource(R.drawable.bg_input_error)
         errorTextView.visibility = View.VISIBLE
         Toast.makeText(requireContext(), R.string.otp_wrong_code, Toast.LENGTH_SHORT).show()

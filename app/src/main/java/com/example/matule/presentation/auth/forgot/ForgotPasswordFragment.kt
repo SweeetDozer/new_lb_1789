@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.matule.R
 import com.example.matule.common.validation.ForgotPasswordValidator
 import com.example.matule.common.validation.Sprint2ValidationResult
+import com.example.matule.presentation.common.KeyboardHelper
 import com.google.android.material.button.MaterialButton
 
 /**
@@ -57,6 +58,7 @@ class ForgotPasswordFragment : Fragment() {
     }
 
     private fun showEmailSentDialog() {
+        KeyboardHelper.hideKeyboard(this)
         AlertDialog.Builder(requireContext())
             .setTitle(R.string.forgot_password_dialog_title)
             .setMessage(R.string.forgot_password_dialog_message)
@@ -67,6 +69,7 @@ class ForgotPasswordFragment : Fragment() {
     }
 
     private fun showErrorDialog(message: String) {
+        KeyboardHelper.hideKeyboard(this)
         AlertDialog.Builder(requireContext())
             .setTitle(R.string.validation_error_title)
             .setMessage(message)

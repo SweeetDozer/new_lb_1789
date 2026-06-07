@@ -1,5 +1,6 @@
 package com.example.matule.presentation.auth.update
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
@@ -19,6 +20,7 @@ import com.example.matule.common.validation.PasswordStrength
 import com.example.matule.common.validation.PasswordStrengthCalculator
 import com.example.matule.common.validation.Sprint2ValidationResult
 import com.example.matule.common.validation.UpdatePasswordValidator
+import com.example.matule.presentation.common.KeyboardHelper
 import com.google.android.material.button.MaterialButton
 
 /**
@@ -96,7 +98,7 @@ class UpdatePasswordFragment : Fragment() {
     private fun updateFormState() {
         renderStrength(newPasswordEditText.text?.toString().orEmpty())
         saveButton.isEnabled = isCurrentFormValid()
-        saveButton.alpha = if (saveButton.isEnabled) ENABLED_ALPHA else DISABLED_ALPHA
+        renderSaveButton()
     }
 
     private fun renderStrength(password: String) {
@@ -132,8 +134,21 @@ class UpdatePasswordFragment : Fragment() {
             captchaInput = captchaEditText.text?.toString().orEmpty()
         )) {
             is Sprint2ValidationResult.Error -> showErrorDialog(toRussianMessage(result.message))
-            Sprint2ValidationResult.Success -> findNavController().navigate(R.id.action_updatePasswordFragment_to_homeFragment)
+            Sprint2ValidationResult.Success -> {
+                KeyboardHelper.hideKeyboard(this)
+                findNavController().navigate(R.id.action_updatePasswordFragment_to_homeFragment)
+            }
         }
+    }
+
+    private fun renderSaveButton() {
+        val buttonColor = if (saveButton.isEnabled) {
+            requireContext().getColor(R.color.matule_primary)
+        } else {
+            requireContext().getColor(R.color.matule_primary_disabled)
+        }
+        saveButton.backgroundTintList = ColorStateList.valueOf(buttonColor)
+        saveButton.alpha = ENABLED_ALPHA
     }
 
     private fun toggleNewPasswordVisibility() {
@@ -156,6 +171,7 @@ class UpdatePasswordFragment : Fragment() {
     }
 
     private fun showErrorDialog(message: String) {
+        KeyboardHelper.hideKeyboard(this)
         AlertDialog.Builder(requireContext())
             .setTitle(R.string.validation_error_title)
             .setMessage(message)
@@ -178,6 +194,5 @@ class UpdatePasswordFragment : Fragment() {
     private companion object {
         const val EXPECTED_CAPTCHA = "A7K9"
         const val ENABLED_ALPHA = 1.0f
-        const val DISABLED_ALPHA = 0.5f
     }
 }

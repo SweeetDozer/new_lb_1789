@@ -1,5 +1,6 @@
 <resources>
     <color name="matule_primary">#48B2E7</color>
+    <color name="matule_primary_disabled">#B8E1F4</color>
     <color name="matule_primary_dark">#0D6E9E</color>
     <color name="matule_background">#F7F7F9</color>
     <color name="matule_blue_screen">#48B7E8</color>

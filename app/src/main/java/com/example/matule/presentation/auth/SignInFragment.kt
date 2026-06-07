@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.matule.R
 import com.example.matule.common.validation.SignInValidationResult
 import com.example.matule.common.validation.SignInValidator
+import com.example.matule.presentation.common.KeyboardHelper
 
 /**
  * Purpose: Shows Sprint 1 Sign In screen with local validation and mock login.
@@ -88,6 +89,7 @@ class SignInFragment : Fragment() {
         when (val result = signInValidator.validate(email, password)) {
             is SignInValidationResult.Error -> showErrorDialog(toRussianMessage(result.message))
             SignInValidationResult.Success -> {
+                KeyboardHelper.hideKeyboard(this)
                 Toast.makeText(requireContext(), R.string.mock_login_success, Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
             }
@@ -123,6 +125,7 @@ class SignInFragment : Fragment() {
      * Purpose: Shows validation message in a user-closed dialog.
      */
     private fun showErrorDialog(message: String) {
+        KeyboardHelper.hideKeyboard(this)
         AlertDialog.Builder(requireContext())
             .setTitle(R.string.validation_error_title)
             .setMessage(message)
