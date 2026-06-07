@@ -103,15 +103,59 @@
         <action
             android:id="@+id/action_homeFragment_to_popularFragment"
             app:destination="@id/popularFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/catalogFragment"
         android:name="com.example.matule.presentation.catalog.CatalogFragment"
-        android:label="@string/shop_categories" />
+        android:label="@string/shop_categories">
+        <action
+            android:id="@+id/action_catalogFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/popularFragment"
         android:name="com.example.matule.presentation.popular.PopularFragment"
-        android:label="@string/shop_popular" />
+        android:label="@string/shop_popular">
+        <action
+            android:id="@+id/action_popularFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_popularFragment_to_filtersFragment"
+            app:destination="@id/filtersFragment" />
+        <action
+            android:id="@+id/action_popularFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.matule.presentation.details.DetailsFragment"
+        android:label="@string/shop_details_title">
+        <argument
+            android:name="product_id"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.matule.presentation.favorite.FavoriteFragment"
+        android:label="@string/shop_favorite_title">
+        <action
+            android:id="@+id/action_favoriteFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/filtersFragment"
+        android:name="com.example.matule.presentation.filters.FiltersFragment"
+        android:label="@string/shop_filters_title" />
 </navigation>

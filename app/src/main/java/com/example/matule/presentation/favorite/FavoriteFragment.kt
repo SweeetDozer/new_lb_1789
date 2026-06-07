@@ -1,71 +1,64 @@
-package com.example.matule.presentation.popular
+package com.example.matule.presentation.favorite
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Space
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.matule.R
-import com.example.matule.common.catalog.ProductFilter
-import com.example.matule.data.local.ProductMockData
 import com.example.matule.domain.model.Product
 import com.example.matule.presentation.details.DetailsFragment
 import com.example.matule.presentation.shop.ProductCardBinder
 import com.example.matule.presentation.shop.ProductUiState
 
 /**
- * Purpose: Shows Sprint 3 Popular products screen with reusable product cards.
+ * Purpose: Shows Sprint 3 favorite products saved in local memory.
  * Creation date: 2026-06-07
  * Author: Mors
  */
-class PopularFragment : Fragment() {
-    private val products = ProductMockData.products()
-    private val productFilter = ProductFilter()
-
-    private lateinit var productsContainer: LinearLayout
+class FavoriteFragment : Fragment() {
     private lateinit var emptyTextView: TextView
+    private lateinit var productsContainer: LinearLayout
 
     /**
-     * Purpose: Creates Popular XML view.
+     * Purpose: Creates Favorite XML view.
      */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_popular, container, false)
+    ): View = inflater.inflate(R.layout.fragment_favorite, container, false)
 
     /**
-     * Purpose: Fills Popular screen product grid and simple actions.
+     * Purpose: Renders favorite grid and empty state.
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        productsContainer = view.findViewById(R.id.popularProductsContainer)
-        emptyTextView = view.findViewById(R.id.popularEmptyTextView)
-        view.findViewById<View>(R.id.popularBackButton).setOnClickListener { findNavController().navigateUp() }
-        view.findViewById<View>(R.id.popularFilterButton).setOnClickListener {
-            findNavController().navigate(R.id.action_popularFragment_to_filtersFragment)
-        }
-        renderGrid()
+        emptyTextView = view.findViewById(R.id.favoriteEmptyTextView)
+        productsContainer = view.findViewById(R.id.favoriteProductsContainer)
+        view.findViewById<View>(R.id.favoriteBackButton).setOnClickListener { findNavController().navigateUp() }
+        renderFavorites()
     }
 
     override fun onResume() {
         super.onResume()
         if (::productsContainer.isInitialized) {
-            renderGrid()
+            renderFavorites()
         }
     }
 
-    private fun renderGrid() {
-        val filteredProducts = productFilter.filter(products, ProductUiState.filterOptions)
+    private fun renderFavorites() {
+        val favorites = ProductUiState.favoriteManager.getFavorites()
         productsContainer.removeAllViews()
-        emptyTextView.visibility = if (filteredProducts.isEmpty()) View.VISIBLE else View.GONE
+        emptyTextView.visibility = if (favorites.isEmpty()) View.VISIBLE else View.GONE
 
-        filteredProducts.chunked(GRID_COLUMNS).forEach { rowProducts ->
+        favorites.chunked(GRID_COLUMNS).forEach { rowProducts ->
             val row = LinearLayout(requireContext())
             row.layoutParams = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -74,23 +67,29 @@ class PopularFragment : Fragment() {
             row.orientation = LinearLayout.HORIZONTAL
 
             rowProducts.forEach { product ->
-                val card = ProductCardBinder.createCard(row, product, ::addFavoriteAndOpenFavorite, ::addToCart, ::openDetails)
+                val card = ProductCardBinder.createCard(row, product, ::removeFavorite, ::addToCart, ::openDetails)
                 card.layoutParams = LinearLayout.LayoutParams(0, 230.dp(), 1f).apply {
-                    marginEnd = 8.dp()
                     marginStart = 8.dp()
+                    marginEnd = 8.dp()
                 }
                 row.addView(card)
+            }
+            if (rowProducts.size < GRID_COLUMNS) {
+                val spacer = Space(requireContext())
+                spacer.layoutParams = LinearLayout.LayoutParams(0, 230.dp(), 1f).apply {
+                    marginStart = 8.dp()
+                    marginEnd = 8.dp()
+                }
+                row.addView(spacer)
             }
             productsContainer.addView(row)
         }
     }
 
-    private fun addFavoriteAndOpenFavorite(product: Product) {
-        if (!ProductUiState.favoriteManager.isFavorite(product.id)) {
-            ProductUiState.favoriteManager.add(product)
-            Toast.makeText(requireContext(), R.string.shop_favorite_added, Toast.LENGTH_SHORT).show()
-        }
-        findNavController().navigate(R.id.action_popularFragment_to_favoriteFragment)
+    private fun removeFavorite(product: Product) {
+        ProductUiState.favoriteManager.remove(product.id)
+        Toast.makeText(requireContext(), R.string.shop_favorite_removed, Toast.LENGTH_SHORT).show()
+        renderFavorites()
     }
 
     private fun addToCart(product: Product) {
@@ -101,7 +100,7 @@ class PopularFragment : Fragment() {
     private fun openDetails(product: Product) {
         ProductUiState.selectedProductId = product.id
         findNavController().navigate(
-            R.id.action_popularFragment_to_detailsFragment,
+            R.id.action_favoriteFragment_to_detailsFragment,
             bundleOf(DetailsFragment.ARG_PRODUCT_ID to product.id)
         )
     }

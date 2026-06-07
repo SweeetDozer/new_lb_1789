@@ -52,6 +52,16 @@
                     android:textSize="26sp" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/popularEmptyTextView"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:gravity="center"
+                android:text="@string/shop_products_not_found"
+                android:textColor="@color/matule_text_gray"
+                android:textSize="17sp"
+                android:visibility="gone" />
+
             <LinearLayout
                 android:id="@+id/popularProductsContainer"
                 android:layout_width="match_parent"

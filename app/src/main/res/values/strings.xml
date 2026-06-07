@@ -77,4 +77,26 @@
     <string name="shop_catalog_running">Running</string>
     <string name="shop_filter">Фильтры</string>
     <string name="shop_back">Назад</string>
+    <string name="shop_details_title">Детали</string>
+    <string name="shop_more">подробнее</string>
+    <string name="shop_collapse">свернуть</string>
+    <string name="shop_add_to_cart_button">В корзину</string>
+    <string name="shop_favorite_title">Избранное</string>
+    <string name="shop_favorite_empty">Избранных товаров пока нет</string>
+    <string name="shop_filters_title">Фильтры</string>
+    <string name="shop_only_discount">Со скидкой</string>
+    <string name="shop_price_from">Цена от</string>
+    <string name="shop_price_to">Цена до</string>
+    <string name="shop_filter_colors">Цвета</string>
+    <string name="shop_filter_types">Тип</string>
+    <string name="shop_type_casual">Повседневная</string>
+    <string name="shop_type_sport">Спортивная</string>
+    <string name="shop_apply_filter">Применить фильтр</string>
+    <string name="shop_products_not_found">Товары не найдены</string>
+    <string name="shop_filter_error">Проверьте диапазон цен</string>
+    <string name="shop_color_black">Black</string>
+    <string name="shop_color_white">White</string>
+    <string name="shop_color_blue">Blue</string>
+    <string name="shop_color_red">Red</string>
+    <string name="shop_color_green">Green</string>
 </resources>

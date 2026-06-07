@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.matule.R
 import com.example.matule.data.local.ProductMockData
 import com.example.matule.domain.model.Product
+import com.example.matule.presentation.details.DetailsFragment
 import com.example.matule.presentation.shop.ProductCardBinder
 import com.example.matule.presentation.shop.ProductUiState
 
@@ -80,7 +82,7 @@ class HomeFragment : Fragment() {
                 product = product,
                 onFavoriteClick = ::toggleFavorite,
                 onAddClick = ::addToCart,
-                onCardClick = ::showDetailsLater
+                onCardClick = ::openDetails
             )
             card.layoutParams = LinearLayout.LayoutParams(170.dp(), 230.dp()).apply {
                 marginEnd = 16.dp()
@@ -97,7 +99,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_catalogFragment)
         }
         view.findViewById<View>(R.id.navFavoriteButton).setOnClickListener {
-            Toast.makeText(requireContext(), R.string.shop_favorite_later, Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
         }
         view.findViewById<View>(R.id.navCartButton).setOnClickListener {
             Toast.makeText(requireContext(), R.string.shop_cart_later, Toast.LENGTH_SHORT).show()
@@ -125,8 +127,12 @@ class HomeFragment : Fragment() {
         Toast.makeText(requireContext(), R.string.shop_added_to_cart, Toast.LENGTH_SHORT).show()
     }
 
-    private fun showDetailsLater(product: Product) {
-        Toast.makeText(requireContext(), "${product.name}: ${getString(R.string.shop_details_later)}", Toast.LENGTH_SHORT).show()
+    private fun openDetails(product: Product) {
+        ProductUiState.selectedProductId = product.id
+        findNavController().navigate(
+            R.id.action_homeFragment_to_detailsFragment,
+            bundleOf(DetailsFragment.ARG_PRODUCT_ID to product.id)
+        )
     }
 
     private fun Int.dp(): Int {

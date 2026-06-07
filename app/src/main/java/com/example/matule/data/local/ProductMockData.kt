@@ -45,7 +45,7 @@ object ProductMockData {
             colors = colors,
             type = type,
             imageName = "img_onboard_1",
-            description = "$name demo description for Sprint 3 catalog"
+            description = "$name создан для легкой прогулки, учебы и активного дня. Модель хорошо сочетается с повседневной одеждой, держит форму и подходит для демонстрации каталога Matule в Sprint 3."
         )
     }
 }

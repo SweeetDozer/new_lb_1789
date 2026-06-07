@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.matule.R
 import com.example.matule.data.local.ProductMockData
 import com.example.matule.domain.model.Product
+import com.example.matule.presentation.details.DetailsFragment
 import com.example.matule.presentation.shop.ProductCardBinder
 import com.example.matule.presentation.shop.ProductUiState
 
@@ -82,7 +84,7 @@ class CatalogFragment : Fragment() {
             row.orientation = LinearLayout.HORIZONTAL
 
             rowProducts.forEach { product ->
-                val card = ProductCardBinder.createCard(row, product, ::toggleFavorite, ::addToCart, ::showDetailsLater)
+                val card = ProductCardBinder.createCard(row, product, ::toggleFavorite, ::addToCart, ::openDetails)
                 card.layoutParams = LinearLayout.LayoutParams(0, 230.dp(), 1f).apply {
                     marginEnd = 8.dp()
                     marginStart = 8.dp()
@@ -106,8 +108,12 @@ class CatalogFragment : Fragment() {
         Toast.makeText(requireContext(), R.string.shop_added_to_cart, Toast.LENGTH_SHORT).show()
     }
 
-    private fun showDetailsLater(product: Product) {
-        Toast.makeText(requireContext(), product.name, Toast.LENGTH_SHORT).show()
+    private fun openDetails(product: Product) {
+        ProductUiState.selectedProductId = product.id
+        findNavController().navigate(
+            R.id.action_catalogFragment_to_detailsFragment,
+            bundleOf(DetailsFragment.ARG_PRODUCT_ID to product.id)
+        )
     }
 
     private fun Int.dp(): Int = (this * resources.displayMetrics.density).toInt()
