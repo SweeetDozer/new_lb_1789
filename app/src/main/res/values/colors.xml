@@ -10,4 +10,7 @@
     <color name="matule_input_bg">#FFFFFF</color>
     <color name="matule_input_stroke">#EDF0F2</color>
     <color name="matule_dot_inactive">#2B7FA3</color>
+    <color name="matule_error">#EF5350</color>
+    <color name="matule_success">#2E7D32</color>
+    <color name="matule_light_control">#F7F7F9</color>
 </resources>

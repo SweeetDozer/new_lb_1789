@@ -65,13 +65,17 @@ class SignInFragment : Fragment() {
     }
 
     /**
-     * Purpose: Handles Sign In and placeholder actions.
+     * Purpose: Handles Sign In, password visibility, and Sprint 2 navigation.
      */
     private fun setupClicks() {
         signInButton.setOnClickListener { validateAndOpenHome() }
         passwordToggleButton.setOnClickListener { togglePasswordVisibility() }
-        forgotPasswordTextView.setOnClickListener { showLaterToast() }
-        createUserTextView.setOnClickListener { showLaterToast() }
+        forgotPasswordTextView.setOnClickListener {
+            findNavController().navigate(R.id.action_signInFragment_to_forgotPasswordFragment)
+        }
+        createUserTextView.setOnClickListener {
+            findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
+        }
     }
 
     /**
@@ -124,13 +128,6 @@ class SignInFragment : Fragment() {
             .setMessage(message)
             .setPositiveButton(R.string.dialog_ok, null)
             .show()
-    }
-
-    /**
-     * Purpose: Shows a placeholder message for future Sprint screens.
-     */
-    private fun showLaterToast() {
-        Toast.makeText(requireContext(), R.string.feature_later, Toast.LENGTH_SHORT).show()
     }
 
     private companion object {
