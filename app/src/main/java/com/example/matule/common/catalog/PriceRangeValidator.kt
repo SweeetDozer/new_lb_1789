@@ -11,7 +11,25 @@ class PriceRangeValidator {
      * Purpose: Checks that min and max prices are empty or valid non-negative numbers.
      */
     fun validate(minPriceText: String, maxPriceText: String): PriceRangeValidationResult {
-        return PriceRangeValidationResult.Valid
+        val minPrice = parsePrice(minPriceText)
+        val maxPrice = parsePrice(maxPriceText)
+
+        return when {
+            minPriceText.isNotBlank() && minPrice == null -> PriceRangeValidationResult.Error("Invalid min price")
+            maxPriceText.isNotBlank() && maxPrice == null -> PriceRangeValidationResult.Error("Invalid max price")
+            minPrice != null && minPrice < 0 -> PriceRangeValidationResult.Error("Price cannot be negative")
+            maxPrice != null && maxPrice < 0 -> PriceRangeValidationResult.Error("Price cannot be negative")
+            minPrice != null && maxPrice != null && minPrice > maxPrice -> PriceRangeValidationResult.Error("Min price must be less than max price")
+            else -> PriceRangeValidationResult.Valid
+        }
+    }
+
+    private fun parsePrice(value: String): Double? {
+        return if (value.isBlank()) {
+            null
+        } else {
+            value.toDoubleOrNull()
+        }
     }
 }
 

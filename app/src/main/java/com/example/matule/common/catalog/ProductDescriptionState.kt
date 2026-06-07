@@ -13,20 +13,36 @@ class ProductDescriptionState {
      * Purpose: Returns max lines for description according to current state.
      */
     fun maxLines(): Int {
-        return COLLAPSED_MAX_LINES
+        return if (isExpanded) {
+            EXPANDED_MAX_LINES
+        } else {
+            COLLAPSED_MAX_LINES
+        }
     }
 
     /**
      * Purpose: Expands description.
      */
-    fun expand() = Unit
+    fun expand() {
+        isExpanded = true
+    }
+
+    /**
+     * Purpose: Collapses description.
+     */
+    fun collapse() {
+        isExpanded = false
+    }
 
     /**
      * Purpose: Switches description between expanded and collapsed states.
      */
-    fun toggle() = Unit
+    fun toggle() {
+        isExpanded = !isExpanded
+    }
 
     private companion object {
         const val COLLAPSED_MAX_LINES = 2
+        const val EXPANDED_MAX_LINES = Int.MAX_VALUE
     }
 }

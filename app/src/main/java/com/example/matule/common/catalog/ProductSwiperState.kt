@@ -23,12 +23,20 @@ class ProductSwiperState(
     /**
      * Purpose: Moves selection to next product.
      */
-    fun next() = Unit
+    fun next() {
+        if (currentIndex < products.lastIndex) {
+            currentIndex++
+        }
+    }
 
     /**
      * Purpose: Moves selection to previous product.
      */
-    fun previous() = Unit
+    fun previous() {
+        if (currentIndex > 0) {
+            currentIndex--
+        }
+    }
 
     /**
      * Purpose: Reports whether index should be highlighted in UI.

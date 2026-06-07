@@ -9,38 +9,60 @@ import com.example.matule.domain.model.Product
  * Author: Mors
  */
 class CartManager {
+    private val cartItems = linkedMapOf<String, CartItem>()
 
     /**
      * Purpose: Adds product to cart or increases quantity if it already exists.
      */
-    fun add(product: Product) = Unit
+    fun add(product: Product) {
+        val currentItem = cartItems[product.id]
+        cartItems[product.id] = if (currentItem == null) {
+            CartItem(product = product, quantity = 1)
+        } else {
+            currentItem.copy(quantity = currentItem.quantity + 1)
+        }
+    }
 
     /**
      * Purpose: Increases product quantity.
      */
-    fun increase(productId: String) = Unit
+    fun increase(productId: String) {
+        val currentItem = cartItems[productId] ?: return
+        cartItems[productId] = currentItem.copy(quantity = currentItem.quantity + 1)
+    }
 
     /**
      * Purpose: Decreases product quantity without making it negative.
      */
-    fun decrease(productId: String) = Unit
+    fun decrease(productId: String) {
+        val currentItem = cartItems[productId] ?: return
+        if (currentItem.quantity > MIN_QUANTITY) {
+            cartItems[productId] = currentItem.copy(quantity = currentItem.quantity - 1)
+        }
+    }
 
     /**
      * Purpose: Removes product from cart.
      */
-    fun remove(productId: String) = Unit
+    fun remove(productId: String) {
+        cartItems.remove(productId)
+    }
 
     /**
      * Purpose: Returns cart item by product id.
      */
     fun getItem(productId: String): CartItem? {
-        return null
+        return cartItems[productId]
     }
 
     /**
      * Purpose: Calculates total products count in cart.
      */
     fun totalCount(): Int {
-        return 0
+        return cartItems.values.sumOf { it.quantity }
+    }
+
+    private companion object {
+        const val MIN_QUANTITY = 1
     }
 }

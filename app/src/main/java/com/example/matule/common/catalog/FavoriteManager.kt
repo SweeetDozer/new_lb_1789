@@ -8,28 +8,33 @@ import com.example.matule.domain.model.Product
  * Author: Mors
  */
 class FavoriteManager {
+    private val favorites = linkedMapOf<String, Product>()
 
     /**
      * Purpose: Adds product to favorites.
      */
-    fun add(product: Product) = Unit
+    fun add(product: Product) {
+        favorites[product.id] = product
+    }
 
     /**
      * Purpose: Removes product from favorites.
      */
-    fun remove(productId: String) = Unit
+    fun remove(productId: String) {
+        favorites.remove(productId)
+    }
 
     /**
      * Purpose: Checks whether product is in favorites.
      */
     fun isFavorite(productId: String): Boolean {
-        return false
+        return favorites.containsKey(productId)
     }
 
     /**
      * Purpose: Returns current favorite products.
      */
     fun getFavorites(): List<Product> {
-        return emptyList()
+        return favorites.values.toList()
     }
 }
