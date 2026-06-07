@@ -14,4 +14,6 @@
     <color name="matule_error">#EF5350</color>
     <color name="matule_success">#2E7D32</color>
     <color name="matule_light_control">#F7F7F9</color>
+    <color name="matule_card_bg">#FFFFFF</color>
+    <color name="matule_sale_purple">#6747D7</color>
 </resources>

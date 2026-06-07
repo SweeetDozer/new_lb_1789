@@ -1,35 +1,269 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/matule_background"
-    android:padding="@dimen/screen_padding">
+    android:background="@color/matule_background">
 
-    <TextView
-        android:id="@+id/homeTitleTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/home_title"
-        android:textColor="@color/matule_text_dark"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/homePlaceholderTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:id="@+id/homeScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="false"
+        android:paddingBottom="96dp">
 
-    <TextView
-        android:id="@+id/homePlaceholderTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/home_placeholder"
-        android:textColor="@color/matule_text_gray"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/homeTitleTextView" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/screen_padding">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/homeMenuButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:gravity="center"
+                    android:text="☰"
+                    android:textColor="@color/matule_text_dark"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/homeTitleTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/home_title"
+                    android:textColor="@color/matule_text_dark"
+                    android:textSize="32sp" />
+
+                <TextView
+                    android:id="@+id/homeBagButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_shop_round_light"
+                    android:gravity="center"
+                    android:text="▣"
+                    android:textColor="@color/matule_text_dark"
+                    android:textSize="22sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_marginTop="22dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/homeSearchTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_shop_search"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:text="⌕  Поиск"
+                    android:textColor="@color/matule_text_gray"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/homeFilterButton"
+                    android:layout_width="58dp"
+                    android:layout_height="58dp"
+                    android:background="@drawable/bg_shop_round_primary"
+                    android:gravity="center"
+                    android:text="☷"
+                    android:textColor="@color/matule_white"
+                    android:textSize="28sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="@string/shop_categories"
+                android:textColor="@color/matule_text_dark"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:id="@+id/homeCategoryRow"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="26dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/shop_popular"
+                    android:textColor="@color/matule_text_dark"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/showAllPopularTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/shop_all"
+                    android:textColor="@color/matule_primary"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:overScrollMode="never"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/homePopularContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="28dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/shop_sales"
+                    android:textColor="@color/matule_text_dark"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/shop_all"
+                    android:textColor="@color/matule_primary"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="128dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_shop_sale"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="18dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Summer Sale"
+                        android:textColor="@color/matule_text_dark"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="15% OFF"
+                        android:textColor="@color/matule_sale_purple"
+                        android:textSize="32sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="80dp"
+                    android:contentDescription="@string/shop_sales"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_onboard_2" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/homeBottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        android:layout_gravity="bottom"
+        android:background="@color/matule_white"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp">
+
+        <TextView
+            android:id="@+id/navHomeButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="⌂"
+            android:textColor="@color/matule_primary"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/navFavoriteButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="♡"
+            android:textColor="@color/matule_text_gray"
+            android:textSize="32sp" />
+
+        <TextView
+            android:id="@+id/navCartButton"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/bg_shop_round_primary"
+            android:gravity="center"
+            android:text="▣"
+            android:textColor="@color/matule_white"
+            android:textSize="28sp" />
+
+        <TextView
+            android:id="@+id/navNotificationButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="♧"
+            android:textColor="@color/matule_text_gray"
+            android:textSize="28sp" />
+
+        <TextView
+            android:id="@+id/navProfileButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="♙"
+            android:textColor="@color/matule_text_gray"
+            android:textSize="28sp" />
+    </LinearLayout>
+</FrameLayout>

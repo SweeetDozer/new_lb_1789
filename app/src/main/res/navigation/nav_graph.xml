@@ -96,5 +96,22 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.matule.presentation.home.HomeFragment"
-        android:label="@string/home_title" />
+        android:label="@string/home_title">
+        <action
+            android:id="@+id/action_homeFragment_to_catalogFragment"
+            app:destination="@id/catalogFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_popularFragment"
+            app:destination="@id/popularFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/catalogFragment"
+        android:name="com.example.matule.presentation.catalog.CatalogFragment"
+        android:label="@string/shop_categories" />
+
+    <fragment
+        android:id="@+id/popularFragment"
+        android:name="com.example.matule.presentation.popular.PopularFragment"
+        android:label="@string/shop_popular" />
 </navigation>

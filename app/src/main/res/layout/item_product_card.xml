@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="170dp"
+    android:layout_height="230dp"
+    android:background="@drawable/bg_shop_card">
+
+    <TextView
+        android:id="@+id/productFavoriteButton"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_shop_round_light"
+        android:gravity="center"
+        android:text="♡"
+        android:textColor="@color/matule_text_dark"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/productImageView"
+        android:layout_width="136dp"
+        android:layout_height="78dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="46dp"
+        android:contentDescription="@string/shop_best_seller"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_onboard_1" />
+
+    <TextView
+        android:id="@+id/productBadgeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/shop_best_seller"
+        android:textColor="@color/matule_primary"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/productNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="154dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/matule_text_gray"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/productPriceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/matule_text_dark"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/productAddButton"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_gravity="bottom|end"
+        android:background="@drawable/bg_shop_add_button"
+        android:gravity="center"
+        android:text="+"
+        android:textColor="@color/matule_white"
+        android:textSize="34sp" />
+</FrameLayout>

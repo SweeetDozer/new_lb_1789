@@ -58,4 +58,23 @@
     <string name="update_password_save">Сохранить</string>
     <string name="privacy_policy_title">Политика конфиденциальности</string>
     <string name="privacy_policy_message">Учебная версия: персональные данные используются только для демонстрации экранов регистрации. TODO: replace with real PDF policy file if provided.</string>
+    <string name="shop_search_hint">Поиск</string>
+    <string name="shop_categories">Категории</string>
+    <string name="shop_popular">Популярное</string>
+    <string name="shop_all">Все</string>
+    <string name="shop_sales">Акции</string>
+    <string name="shop_best_seller">BEST SELLER</string>
+    <string name="shop_added_to_cart">Товар добавлен в корзину</string>
+    <string name="shop_favorite_added">Добавлено в избранное</string>
+    <string name="shop_favorite_removed">Удалено из избранного</string>
+    <string name="shop_details_later">Детали товара будут добавлены в следующей части</string>
+    <string name="shop_favorite_later">Избранное будет добавлено в следующей части</string>
+    <string name="shop_cart_later">Корзина будет добавлена в Sprint 4</string>
+    <string name="shop_notification_later">Уведомления будут добавлены позже</string>
+    <string name="shop_profile_later">Профиль будет добавлен позже</string>
+    <string name="shop_catalog_outdoor">Outdoor</string>
+    <string name="shop_catalog_tennis">Tennis</string>
+    <string name="shop_catalog_running">Running</string>
+    <string name="shop_filter">Фильтры</string>
+    <string name="shop_back">Назад</string>
 </resources>
