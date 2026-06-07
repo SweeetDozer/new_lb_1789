@@ -1,0 +1,32 @@
+package com.example.matule.common.catalog
+
+/**
+ * Purpose: Stores expanded/collapsed state for product description on Details screen.
+ * Creation date: 2026-06-07
+ * Author: Mors
+ */
+class ProductDescriptionState {
+    var isExpanded: Boolean = false
+        private set
+
+    /**
+     * Purpose: Returns max lines for description according to current state.
+     */
+    fun maxLines(): Int {
+        return COLLAPSED_MAX_LINES
+    }
+
+    /**
+     * Purpose: Expands description.
+     */
+    fun expand() = Unit
+
+    /**
+     * Purpose: Switches description between expanded and collapsed states.
+     */
+    fun toggle() = Unit
+
+    private companion object {
+        const val COLLAPSED_MAX_LINES = 2
+    }
+}
