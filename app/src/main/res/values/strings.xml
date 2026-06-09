@@ -103,4 +103,23 @@
     <string name="search_history_title">История поиска</string>
     <string name="search_result_from_history">Результат из истории</string>
     <string name="search_result_from_local_cache">Результат из локального хранилища</string>
+    <string name="cart_title">Корзина</string>
+    <string name="cart_empty">Корзина пуста</string>
+    <string name="cart_checkout">Оформить заказ</string>
+    <string name="cart_subtotal">Сумма товаров</string>
+    <string name="cart_delivery">Доставка</string>
+    <string name="cart_total">Итого</string>
+    <string name="cart_quantity_increased">Количество увеличено</string>
+    <string name="cart_item_deleted">Товар удалён</string>
+    <string name="checkout_title">Оформление заказа</string>
+    <string name="checkout_email">Email</string>
+    <string name="checkout_phone">Телефон</string>
+    <string name="checkout_address">Адрес</string>
+    <string name="checkout_profile_address">Адрес из профиля</string>
+    <string name="checkout_geo_address">Адрес по геолокации</string>
+    <string name="checkout_confirm">Подтвердить заказ</string>
+    <string name="checkout_validation_message">Проверьте данные заказа</string>
+    <string name="order_confirm_title">Заказ оформлен</string>
+    <string name="order_confirm_message">Ваш заказ успешно оформлен.</string>
+    <string name="order_return_to_shopping">Вернуться к покупкам</string>
 </resources>

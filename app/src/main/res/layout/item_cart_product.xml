@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="126dp"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/bg_shop_card"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="14dp">
+
+    <ImageView
+        android:id="@+id/cartProductImageView"
+        android:layout_width="96dp"
+        android:layout_height="78dp"
+        android:contentDescription="@string/cart_title"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_onboard_1" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/cartProductNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textColor="@color/matule_text_dark"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/cartProductPriceTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/matule_text_dark"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/cartMinusButton"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_shop_round_light"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="@color/matule_text_dark"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/cartQuantityTextView"
+                android:layout_width="44dp"
+                android:layout_height="36dp"
+                android:gravity="center"
+                android:textColor="@color/matule_text_dark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cartPlusButton"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_shop_round_primary"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="@color/matule_white"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/cartDeleteButton"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:background="@drawable/bg_shop_round_light"
+        android:gravity="center"
+        android:text="×"
+        android:textColor="@color/matule_error"
+        android:textSize="24sp" />
+</LinearLayout>

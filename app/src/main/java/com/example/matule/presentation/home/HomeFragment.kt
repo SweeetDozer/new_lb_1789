@@ -105,7 +105,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
         }
         view.findViewById<View>(R.id.navCartButton).setOnClickListener {
-            Toast.makeText(requireContext(), R.string.shop_cart_later, Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_homeFragment_to_cartFragment)
         }
         view.findViewById<View>(R.id.navNotificationButton).setOnClickListener {
             Toast.makeText(requireContext(), R.string.shop_notification_later, Toast.LENGTH_SHORT).show()
