@@ -7,11 +7,7 @@ package com.example.matule.common.profile
  */
 class ProfilePhotoDialogState {
     val options: List<ProfilePhotoSource>
-        get() = listOf(
-            ProfilePhotoSource.CAMERA,
-            ProfilePhotoSource.GALLERY,
-            ProfilePhotoSource.KANDINSKY
-        )
+        get() = PHOTO_OPTIONS
 
     var selectedSource: ProfilePhotoSource? = null
         private set
@@ -21,5 +17,13 @@ class ProfilePhotoDialogState {
      */
     fun select(source: ProfilePhotoSource) {
         selectedSource = source
+    }
+
+    private companion object {
+        val PHOTO_OPTIONS = listOf(
+            ProfilePhotoSource.CAMERA,
+            ProfilePhotoSource.GALLERY,
+            ProfilePhotoSource.KANDINSKY
+        )
     }
 }

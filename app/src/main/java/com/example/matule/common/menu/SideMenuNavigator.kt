@@ -13,8 +13,15 @@ class SideMenuNavigator(
      * Purpose: Returns destination for selected enabled menu item.
      */
     fun destinationFor(itemId: String): String? {
-        return items.firstOrNull { item ->
-            item.id == itemId && item.isEnabled
-        }?.destination
+        val item = findMenuItem(itemId)
+        return if (canNavigate(item)) item?.destination else null
+    }
+
+    private fun findMenuItem(itemId: String): SideMenuItem? {
+        return items.firstOrNull { item -> item.id == itemId }
+    }
+
+    private fun canNavigate(item: SideMenuItem?): Boolean {
+        return item != null && item.isEnabled
     }
 }

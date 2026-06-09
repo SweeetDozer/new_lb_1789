@@ -21,16 +21,28 @@ class NotificationManager(
      * Purpose: Counts unread notifications.
      */
     fun unreadCount(): Int {
-        return items.count { !it.isRead }
+        return items.count { item -> isUnread(item) }
     }
 
     /**
      * Purpose: Marks selected notification as read.
      */
     fun markAsRead(id: String) {
-        val index = items.indexOfFirst { it.id == id }
+        val index = findIndexById(id)
         if (index != -1) {
-            items[index] = items[index].copy(isRead = true)
+            markItemAsRead(index)
         }
+    }
+
+    private fun isUnread(item: NotificationItem): Boolean {
+        return !item.isRead
+    }
+
+    private fun findIndexById(id: String): Int {
+        return items.indexOfFirst { item -> item.id == id }
+    }
+
+    private fun markItemAsRead(index: Int) {
+        items[index] = items[index].copy(isRead = true)
     }
 }

@@ -18,22 +18,32 @@ class OrderDateGrouper(
     fun group(orders: List<Order>): Map<String, List<Order>> {
         val groups = LinkedHashMap<String, MutableList<Order>>()
         for (order in orders) {
-            val label = labelFor(order.createdAt.toLocalDate())
+            val label = groupNameFor(order.createdAt.toLocalDate())
             groups.getOrPut(label) { mutableListOf() }.add(order)
         }
         return groups
     }
 
-    private fun labelFor(date: LocalDate): String {
+    private fun groupNameFor(date: LocalDate): String {
         return when (date) {
-            today -> "Недавние"
-            today.minusDays(1) -> "Вчера"
-            else -> "${date.dayOfMonth} ${monthName(date.monthValue)} ${date.year}"
+            today -> RECENT_GROUP
+            today.minusDays(1) -> YESTERDAY_GROUP
+            else -> formatOlderDate(date)
         }
     }
 
+    private fun formatOlderDate(date: LocalDate): String {
+        return "${date.dayOfMonth} ${monthName(date.monthValue)} ${date.year}"
+    }
+
     private fun monthName(month: Int): String {
-        return listOf(
+        return MONTH_NAMES[month - 1]
+    }
+
+    private companion object {
+        const val RECENT_GROUP = "Недавние"
+        const val YESTERDAY_GROUP = "Вчера"
+        val MONTH_NAMES = listOf(
             "января",
             "февраля",
             "марта",
@@ -46,6 +56,6 @@ class OrderDateGrouper(
             "октября",
             "ноября",
             "декабря"
-        )[month - 1]
+        )
     }
 }

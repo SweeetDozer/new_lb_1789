@@ -14,12 +14,24 @@ class LogoutManager(
      * Purpose: Logs out user and clears local session after success.
      */
     fun logout(): LogoutResult {
-        return if (service.deauthorize()) {
-            session.isLoggedIn = false
-            LogoutResult.LoggedOut
-        } else {
-            LogoutResult.Error("Ошибка выхода")
-        }
+        return if (service.deauthorize()) handleSuccess() else handleError()
+    }
+
+    private fun handleSuccess(): LogoutResult {
+        clearSession()
+        return LogoutResult.LoggedOut
+    }
+
+    private fun handleError(): LogoutResult {
+        return LogoutResult.Error(LOGOUT_ERROR_MESSAGE)
+    }
+
+    private fun clearSession() {
+        session.isLoggedIn = false
+    }
+
+    private companion object {
+        const val LOGOUT_ERROR_MESSAGE = "Ошибка выхода"
     }
 }
 

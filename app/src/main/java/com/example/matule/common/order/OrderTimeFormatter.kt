@@ -17,12 +17,24 @@ class OrderTimeFormatter(
      * Purpose: Returns minutes passed for recent orders or HH:mm for older orders.
      */
     fun format(createdAt: LocalDateTime): String {
-        return if (createdAt.toLocalDate() == now.toLocalDate()) {
-            val minutes = Duration.between(createdAt, now).toMinutes().coerceAtLeast(0)
-            "$minutes ${minuteWord(minutes)} назад"
-        } else {
-            createdAt.format(TIME_FORMATTER)
-        }
+        return if (isToday(createdAt)) formatRecentTime(createdAt) else formatClockTime(createdAt)
+    }
+
+    private fun isToday(createdAt: LocalDateTime): Boolean {
+        return createdAt.toLocalDate() == now.toLocalDate()
+    }
+
+    private fun formatRecentTime(createdAt: LocalDateTime): String {
+        val minutes = minutesPassed(createdAt)
+        return "$minutes ${minuteWord(minutes)} $AGO_WORD"
+    }
+
+    private fun minutesPassed(createdAt: LocalDateTime): Long {
+        return Duration.between(createdAt, now).toMinutes().coerceAtLeast(0)
+    }
+
+    private fun formatClockTime(createdAt: LocalDateTime): String {
+        return createdAt.format(TIME_FORMATTER)
     }
 
     private fun minuteWord(minutes: Long): String {
@@ -37,6 +49,7 @@ class OrderTimeFormatter(
     }
 
     private companion object {
+        const val AGO_WORD = "назад"
         val TIME_FORMATTER: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
     }
 }

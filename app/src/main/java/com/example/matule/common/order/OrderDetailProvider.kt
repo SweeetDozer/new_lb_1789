@@ -13,6 +13,10 @@ class OrderDetailProvider(
      * Purpose: Returns order by id or null when it does not exist.
      */
     fun findById(id: String): Order? {
+        return findOrder(id)
+    }
+
+    private fun findOrder(id: String): Order? {
         return orders.firstOrNull { it.id == id }
     }
 }

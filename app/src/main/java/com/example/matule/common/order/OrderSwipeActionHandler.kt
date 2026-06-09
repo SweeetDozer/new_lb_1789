@@ -12,11 +12,17 @@ class OrderSwipeActionHandler {
      */
     fun handle(action: OrderSwipeAction): OrderSwipeResult {
         return when (action) {
-            OrderSwipeAction.RIGHT -> OrderSwipeResult.REPEAT
-            OrderSwipeAction.LEFT -> OrderSwipeResult.CANCEL
-            OrderSwipeAction.UNKNOWN -> OrderSwipeResult.NONE
+            OrderSwipeAction.RIGHT -> repeatOrder()
+            OrderSwipeAction.LEFT -> cancelOrder()
+            OrderSwipeAction.UNKNOWN -> noAction()
         }
     }
+
+    private fun repeatOrder(): OrderSwipeResult = OrderSwipeResult.REPEAT
+
+    private fun cancelOrder(): OrderSwipeResult = OrderSwipeResult.CANCEL
+
+    private fun noAction(): OrderSwipeResult = OrderSwipeResult.NONE
 }
 
 /**
