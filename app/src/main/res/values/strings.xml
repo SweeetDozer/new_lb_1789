@@ -148,4 +148,20 @@
     <string name="profile_photo_kandinsky_selected">Выбран Кандинский</string>
     <string name="orders_placeholder">Заказы будут реализованы далее</string>
     <string name="notifications_placeholder">Уведомления будут реализованы далее</string>
+    <string name="notifications_title">Уведомления</string>
+    <string name="notifications_empty">Уведомлений пока нет</string>
+    <string name="notification_read_toast">Уведомление прочитано</string>
+    <string name="orders_title">Заказы</string>
+    <string name="orders_empty">Заказов пока нет</string>
+    <string name="order_details_title_sprint5">Детали заказа</string>
+    <string name="order_not_found">Заказ не найден</string>
+    <string name="order_repeat">Повторить заказ</string>
+    <string name="order_cancel">Отменить заказ</string>
+    <string name="order_repeated_toast">Заказ повторён</string>
+    <string name="order_cancelled_toast">Заказ отменён</string>
+    <string name="order_cancel_confirm_title">Отменить заказ?</string>
+    <string name="order_cancel_confirm_message">Заказ будет отменён.</string>
+    <string name="order_status_created">Создан</string>
+    <string name="order_status_cancelled">Отменён</string>
+    <string name="order_status_repeated">Повторён</string>
 </resources>

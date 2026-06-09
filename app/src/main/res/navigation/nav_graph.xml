@@ -142,8 +142,11 @@
             android:id="@+id/action_sideMenuFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
         <action
-            android:id="@+id/action_sideMenuFragment_to_sprint5PlaceholderFragment"
-            app:destination="@id/sprint5PlaceholderFragment" />
+            android:id="@+id/action_sideMenuFragment_to_ordersFragment"
+            app:destination="@id/ordersFragment" />
+        <action
+            android:id="@+id/action_sideMenuFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
         <action
             android:id="@+id/action_sideMenuFragment_to_signInFragment"
             app:destination="@id/signInFragment"
@@ -175,6 +178,30 @@
             android:defaultValue="" />
         <argument
             android:name="message"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.example.matule.presentation.notifications.NotificationsFragment"
+        android:label="@string/notifications_title" />
+
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="com.example.matule.presentation.orders.OrdersFragment"
+        android:label="@string/orders_title">
+        <action
+            android:id="@+id/action_ordersFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/orderDetailFragment"
+        android:name="com.example.matule.presentation.orders.OrderDetailFragment"
+        android:label="@string/order_details_title_sprint5">
+        <argument
+            android:name="order_id"
             app:argType="string"
             android:defaultValue="" />
     </fragment>

@@ -9,7 +9,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.matule.R
@@ -81,22 +80,12 @@ class SideMenuFragment : Fragment() {
         when (navigator.destinationFor(itemId)) {
             DESTINATION_HOME -> findNavController().navigate(R.id.action_sideMenuFragment_to_homeFragment)
             DESTINATION_PROFILE -> findNavController().navigate(R.id.action_sideMenuFragment_to_profileFragment)
-            DESTINATION_ORDERS -> openPlaceholder(getString(R.string.menu_orders), getString(R.string.orders_placeholder))
-            DESTINATION_NOTIFICATIONS -> openPlaceholder(
-                getString(R.string.menu_notifications),
-                getString(R.string.notifications_placeholder)
-            )
+            DESTINATION_ORDERS -> findNavController().navigate(R.id.action_sideMenuFragment_to_ordersFragment)
+            DESTINATION_NOTIFICATIONS -> findNavController().navigate(R.id.action_sideMenuFragment_to_notificationsFragment)
             DESTINATION_FAVORITES -> findNavController().navigate(R.id.action_sideMenuFragment_to_favoriteFragment)
             DESTINATION_CART -> findNavController().navigate(R.id.action_sideMenuFragment_to_cartFragment)
             else -> Toast.makeText(requireContext(), R.string.side_menu_settings_disabled, Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun openPlaceholder(title: String, message: String) {
-        findNavController().navigate(
-            R.id.action_sideMenuFragment_to_sprint5PlaceholderFragment,
-            bundleOf(ARG_TITLE to title, ARG_MESSAGE to message)
-        )
     }
 
     private fun logout() {
@@ -153,9 +142,6 @@ class SideMenuFragment : Fragment() {
         const val DESTINATION_NOTIFICATIONS = "Notification"
         const val DESTINATION_FAVORITES = "Favorite"
         const val DESTINATION_CART = "Cart"
-        const val ARG_TITLE = "title"
-        const val ARG_MESSAGE = "message"
-
         fun menuItems(): List<SideMenuItem> = listOf(
             SideMenuItem("home", "Главная", DESTINATION_HOME, true),
             SideMenuItem("profile", "Профиль", DESTINATION_PROFILE, true),
@@ -167,4 +153,3 @@ class SideMenuFragment : Fragment() {
         )
     }
 }
-
