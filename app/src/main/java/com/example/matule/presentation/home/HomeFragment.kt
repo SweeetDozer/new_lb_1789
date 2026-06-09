@@ -98,6 +98,9 @@ class HomeFragment : Fragment() {
         view.findViewById<View>(R.id.homeFilterButton).setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_catalogFragment)
         }
+        view.findViewById<View>(R.id.homeSearchTextView).setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+        }
         view.findViewById<View>(R.id.navFavoriteButton).setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
         }

@@ -109,6 +109,9 @@
         <action
             android:id="@+id/action_homeFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
 
     <fragment
@@ -158,4 +161,13 @@
         android:id="@+id/filtersFragment"
         android:name="com.example.matule.presentation.filters.FiltersFragment"
         android:label="@string/shop_filters_title" />
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.matule.presentation.search.SearchFragment"
+        android:label="@string/search_title">
+        <action
+            android:id="@+id/action_searchFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
 </navigation>
