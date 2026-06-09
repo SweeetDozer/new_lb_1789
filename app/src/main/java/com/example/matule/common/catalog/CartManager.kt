@@ -67,6 +67,27 @@ class CartManager {
         return cartItems.values.sumOf { it.quantity }
     }
 
+    /**
+     * Purpose: Returns current cart items.
+     */
+    fun items(): List<CartItem> {
+        return cartItems.values.toList()
+    }
+
+    /**
+     * Purpose: Calculates total cart price.
+     */
+    fun totalPrice(): Double {
+        return cartItems.values.sumOf { it.product.price * it.quantity }
+    }
+
+    /**
+     * Purpose: Removes all products from cart.
+     */
+    fun clear() {
+        cartItems.clear()
+    }
+
     private fun updateQuantity(productId: String, update: (CartItem?) -> CartItem?) {
         val updatedItem = update(cartItems[productId])
         if (updatedItem != null) {
