@@ -14,21 +14,23 @@ class NotificationManager(
      * Purpose: Returns all notifications.
      */
     fun list(): List<NotificationItem> {
-        TODO("Sprint 5 GREEN")
+        return items.toList()
     }
 
     /**
      * Purpose: Counts unread notifications.
      */
     fun unreadCount(): Int {
-        TODO("Sprint 5 GREEN")
+        return items.count { !it.isRead }
     }
 
     /**
      * Purpose: Marks selected notification as read.
      */
     fun markAsRead(id: String) {
-        TODO("Sprint 5 GREEN")
+        val index = items.indexOfFirst { it.id == id }
+        if (index != -1) {
+            items[index] = items[index].copy(isRead = true)
+        }
     }
 }
-

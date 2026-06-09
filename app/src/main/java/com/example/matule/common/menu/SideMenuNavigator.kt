@@ -13,7 +13,8 @@ class SideMenuNavigator(
      * Purpose: Returns destination for selected enabled menu item.
      */
     fun destinationFor(itemId: String): String? {
-        TODO("Sprint 5 GREEN")
+        return items.firstOrNull { item ->
+            item.id == itemId && item.isEnabled
+        }?.destination
     }
 }
-

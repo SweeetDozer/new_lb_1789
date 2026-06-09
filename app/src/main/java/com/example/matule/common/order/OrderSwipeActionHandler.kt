@@ -11,7 +11,11 @@ class OrderSwipeActionHandler {
      * Purpose: Returns action for a swipe direction.
      */
     fun handle(action: OrderSwipeAction): OrderSwipeResult {
-        TODO("Sprint 5 GREEN")
+        return when (action) {
+            OrderSwipeAction.RIGHT -> OrderSwipeResult.REPEAT
+            OrderSwipeAction.LEFT -> OrderSwipeResult.CANCEL
+            OrderSwipeAction.UNKNOWN -> OrderSwipeResult.NONE
+        }
     }
 }
 
@@ -32,4 +36,3 @@ enum class OrderSwipeResult {
     CANCEL,
     NONE
 }
-

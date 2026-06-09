@@ -1,5 +1,6 @@
 package com.example.matule.common.profile
 
+import com.example.matule.common.validation.EmailValidator
 import com.example.matule.common.validation.Sprint2ValidationResult
 
 /**
@@ -13,7 +14,12 @@ class ProfileEditor {
      * Purpose: Saves profile only when edited fields are valid.
      */
     fun save(profile: Profile): Sprint2ValidationResult {
-        TODO("Sprint 5 GREEN")
+        return when {
+            profile.name.isBlank() -> Sprint2ValidationResult.Error("Введите имя")
+            !EmailValidator().isValid(profile.email) -> Sprint2ValidationResult.Error("Некорректный email")
+            !isValidPhone(profile.phone) -> Sprint2ValidationResult.Error("Некорректный телефон")
+            else -> Sprint2ValidationResult.Success
+        }
     }
 
     /**
@@ -25,7 +31,11 @@ class ProfileEditor {
         email: String = profile.email,
         phone: String = profile.phone
     ): Profile {
-        TODO("Sprint 5 GREEN")
+        return profile.copy(name = name, email = email, phone = phone)
+    }
+
+    private fun isValidPhone(phone: String): Boolean {
+        val clearPhone = phone.trim()
+        return clearPhone.isNotEmpty() && clearPhone.all { it.isDigit() || it == '+' }
     }
 }
-

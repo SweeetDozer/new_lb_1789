@@ -13,7 +13,6 @@ class SwipeBackState(
      * Purpose: Returns true when swipe distance is enough to close the menu.
      */
     fun shouldClose(distance: Float): Boolean {
-        TODO("Sprint 5 GREEN")
+        return distance > threshold
     }
 }
-

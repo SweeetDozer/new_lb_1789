@@ -9,13 +9,13 @@ class LoyaltyQrState(
     val loyaltyData: String
 ) {
     val isFullscreen: Boolean
-        get() = TODO("Sprint 5 GREEN")
+        get() = true
 
     val orientation: QrOrientation
-        get() = TODO("Sprint 5 GREEN")
+        get() = QrOrientation.VERTICAL
 
     val brightnessPercent: Int
-        get() = TODO("Sprint 5 GREEN")
+        get() = 75
 }
 
 /**
@@ -25,4 +25,3 @@ enum class QrOrientation {
     VERTICAL,
     HORIZONTAL
 }
-

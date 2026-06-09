@@ -7,7 +7,11 @@ package com.example.matule.common.profile
  */
 class ProfilePhotoDialogState {
     val options: List<ProfilePhotoSource>
-        get() = TODO("Sprint 5 GREEN")
+        get() = listOf(
+            ProfilePhotoSource.CAMERA,
+            ProfilePhotoSource.GALLERY,
+            ProfilePhotoSource.KANDINSKY
+        )
 
     var selectedSource: ProfilePhotoSource? = null
         private set
@@ -16,7 +20,6 @@ class ProfilePhotoDialogState {
      * Purpose: Saves selected photo source from dialog.
      */
     fun select(source: ProfilePhotoSource) {
-        TODO("Sprint 5 GREEN")
+        selectedSource = source
     }
 }
-

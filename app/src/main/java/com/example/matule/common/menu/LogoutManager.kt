@@ -14,7 +14,12 @@ class LogoutManager(
      * Purpose: Logs out user and clears local session after success.
      */
     fun logout(): LogoutResult {
-        TODO("Sprint 5 GREEN")
+        return if (service.deauthorize()) {
+            session.isLoggedIn = false
+            LogoutResult.LoggedOut
+        } else {
+            LogoutResult.Error("Ошибка выхода")
+        }
     }
 }
 
@@ -39,4 +44,3 @@ sealed class LogoutResult {
     object LoggedOut : LogoutResult()
     data class Error(val message: String) : LogoutResult()
 }
-
