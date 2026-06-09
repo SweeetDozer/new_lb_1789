@@ -21,10 +21,18 @@ class OrderSummaryCalculator {
      */
     fun total(cartManager: CartManager, deliveryPrice: Double): Double {
         val subtotal = subtotal(cartManager)
-        return if (subtotal == 0.0) {
+        return if (isEmptySubtotal(subtotal)) {
             0.0
         } else {
-            subtotal + deliveryPrice
+            addDelivery(subtotal, deliveryPrice)
         }
+    }
+
+    private fun isEmptySubtotal(subtotal: Double): Boolean {
+        return subtotal == 0.0
+    }
+
+    private fun addDelivery(subtotal: Double, deliveryPrice: Double): Double {
+        return subtotal + deliveryPrice
     }
 }

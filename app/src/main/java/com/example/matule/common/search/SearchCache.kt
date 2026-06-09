@@ -15,15 +15,31 @@ class SearchCache {
      * Purpose: Searches through provider and marks whether cached data was used.
      */
     fun search(query: String, provider: (String) -> List<Product>): SearchCacheResult {
-        val cacheKey = query.trim().lowercase()
-        if (lastQuery == cacheKey) {
-            return SearchCacheResult(products = lastProducts, wasFromCache = true)
+        val cacheKey = normalizeKey(query)
+        if (isCacheHit(cacheKey)) {
+            return cachedResult()
         }
 
         val products = provider(query)
+        save(cacheKey, products)
+        return SearchCacheResult(products = products, wasFromCache = false)
+    }
+
+    private fun normalizeKey(query: String): String {
+        return query.trim().lowercase()
+    }
+
+    private fun isCacheHit(cacheKey: String): Boolean {
+        return lastQuery == cacheKey
+    }
+
+    private fun cachedResult(): SearchCacheResult {
+        return SearchCacheResult(products = lastProducts, wasFromCache = true)
+    }
+
+    private fun save(cacheKey: String, products: List<Product>) {
         lastQuery = cacheKey
         lastProducts = products
-        return SearchCacheResult(products = products, wasFromCache = false)
     }
 }
 

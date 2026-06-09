@@ -17,14 +17,38 @@ class CheckoutValidator {
      */
     fun validate(data: CheckoutData, cartManager: CartManager): Sprint2ValidationResult {
         return when {
-            data.email.isBlank() -> Sprint2ValidationResult.Error("Введите email")
-            !emailValidator.isValid(data.email.trim()) -> Sprint2ValidationResult.Error("Некорректный email")
-            data.phone.isBlank() -> Sprint2ValidationResult.Error("Введите телефон")
-            !isValidPhone(data.phone.trim()) -> Sprint2ValidationResult.Error("Некорректный телефон")
-            data.address.isBlank() -> Sprint2ValidationResult.Error("Введите адрес")
-            cartManager.totalCount() == 0 -> Sprint2ValidationResult.Error("Корзина пуста")
+            isEmptyEmail(data) -> Sprint2ValidationResult.Error(EMAIL_EMPTY_ERROR)
+            hasInvalidEmail(data) -> Sprint2ValidationResult.Error(EMAIL_INVALID_ERROR)
+            isEmptyPhone(data) -> Sprint2ValidationResult.Error(PHONE_EMPTY_ERROR)
+            hasInvalidPhone(data) -> Sprint2ValidationResult.Error(PHONE_INVALID_ERROR)
+            isEmptyAddress(data) -> Sprint2ValidationResult.Error(ADDRESS_EMPTY_ERROR)
+            isEmptyCart(cartManager) -> Sprint2ValidationResult.Error(CART_EMPTY_ERROR)
             else -> Sprint2ValidationResult.Success
         }
+    }
+
+    private fun isEmptyEmail(data: CheckoutData): Boolean {
+        return data.email.isBlank()
+    }
+
+    private fun hasInvalidEmail(data: CheckoutData): Boolean {
+        return !emailValidator.isValid(data.email.trim())
+    }
+
+    private fun isEmptyPhone(data: CheckoutData): Boolean {
+        return data.phone.isBlank()
+    }
+
+    private fun hasInvalidPhone(data: CheckoutData): Boolean {
+        return !isValidPhone(data.phone.trim())
+    }
+
+    private fun isEmptyAddress(data: CheckoutData): Boolean {
+        return data.address.isBlank()
+    }
+
+    private fun isEmptyCart(cartManager: CartManager): Boolean {
+        return cartManager.totalCount() == 0
     }
 
     private fun isValidPhone(phone: String): Boolean {
@@ -32,6 +56,12 @@ class CheckoutValidator {
     }
 
     private companion object {
+        const val EMAIL_EMPTY_ERROR = "Р’РІРµРґРёС‚Рµ email"
+        const val EMAIL_INVALID_ERROR = "РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ email"
+        const val PHONE_EMPTY_ERROR = "Р’РІРµРґРёС‚Рµ С‚РµР»РµС„РѕРЅ"
+        const val PHONE_INVALID_ERROR = "РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ С‚РµР»РµС„РѕРЅ"
+        const val ADDRESS_EMPTY_ERROR = "Р’РІРµРґРёС‚Рµ Р°РґСЂРµСЃ"
+        const val CART_EMPTY_ERROR = "РљРѕСЂР·РёРЅР° РїСѓСЃС‚Р°"
         val PHONE_PATTERN = Regex("^\\+?[0-9]{10,15}$")
     }
 }

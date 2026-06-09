@@ -11,11 +11,18 @@ class DeliveryDataSelector {
      * Purpose: Returns selected delivery address and source.
      */
     fun select(source: DeliveryDataSource, profileAddress: String, geolocationAddress: String): DeliverySelection {
-        val address = when (source) {
+        return DeliverySelection(address = addressFor(source, profileAddress, geolocationAddress), source = source)
+    }
+
+    private fun addressFor(
+        source: DeliveryDataSource,
+        profileAddress: String,
+        geolocationAddress: String
+    ): String {
+        return when (source) {
             DeliveryDataSource.PROFILE -> profileAddress
             DeliveryDataSource.GEOLOCATION -> geolocationAddress
         }
-        return DeliverySelection(address = address, source = source)
     }
 }
 
