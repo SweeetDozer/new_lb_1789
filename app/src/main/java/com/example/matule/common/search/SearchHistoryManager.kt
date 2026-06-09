@@ -6,18 +6,25 @@ package com.example.matule.common.search
  * Author: Mors
  */
 class SearchHistoryManager {
+    private val queries = mutableListOf<String>()
 
     /**
      * Purpose: Adds query to local history.
      */
     fun add(query: String) {
-        // RED stage placeholder.
+        val preparedQuery = query.trim()
+        if (preparedQuery.isEmpty()) {
+            return
+        }
+
+        queries.remove(preparedQuery)
+        queries.add(0, preparedQuery)
     }
 
     /**
      * Purpose: Returns saved search queries.
      */
     fun history(): List<String> {
-        return emptyList()
+        return queries.toList()
     }
 }

@@ -13,6 +13,16 @@ class SearchEngine {
      * Purpose: Returns products matching user query.
      */
     fun search(products: List<Product>, query: String): List<Product> {
-        return emptyList()
+        val preparedQuery = query.trim().lowercase()
+        if (preparedQuery.isEmpty()) {
+            return products
+        }
+
+        return products.filter { product ->
+            product.name.lowercase().contains(preparedQuery) ||
+                product.category.lowercase().contains(preparedQuery) ||
+                product.type.name.lowercase().contains(preparedQuery) ||
+                product.description.lowercase().contains(preparedQuery)
+        }
     }
 }

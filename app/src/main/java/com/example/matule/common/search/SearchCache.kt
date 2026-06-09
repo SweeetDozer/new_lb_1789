@@ -8,12 +8,22 @@ import com.example.matule.domain.model.Product
  * Author: Mors
  */
 class SearchCache {
+    private var lastQuery: String? = null
+    private var lastProducts: List<Product> = emptyList()
 
     /**
      * Purpose: Searches through provider and marks whether cached data was used.
      */
     fun search(query: String, provider: (String) -> List<Product>): SearchCacheResult {
-        return SearchCacheResult(products = provider(query), wasFromCache = false)
+        val cacheKey = query.trim().lowercase()
+        if (lastQuery == cacheKey) {
+            return SearchCacheResult(products = lastProducts, wasFromCache = true)
+        }
+
+        val products = provider(query)
+        lastQuery = cacheKey
+        lastProducts = products
+        return SearchCacheResult(products = products, wasFromCache = false)
     }
 }
 

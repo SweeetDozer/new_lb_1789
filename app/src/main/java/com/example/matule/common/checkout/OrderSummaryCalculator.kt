@@ -13,13 +13,18 @@ class OrderSummaryCalculator {
      * Purpose: Calculates product subtotal.
      */
     fun subtotal(cartManager: CartManager): Double {
-        return 0.0
+        return cartManager.totalPrice()
     }
 
     /**
      * Purpose: Calculates final total with delivery price.
      */
     fun total(cartManager: CartManager, deliveryPrice: Double): Double {
-        return 0.0
+        val subtotal = subtotal(cartManager)
+        return if (subtotal == 0.0) {
+            0.0
+        } else {
+            subtotal + deliveryPrice
+        }
     }
 }

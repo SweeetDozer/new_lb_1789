@@ -11,7 +11,11 @@ class OrderConfirmationState {
      * Purpose: Confirms order and returns confirmation result.
      */
     fun confirm(): OrderConfirmationResult {
-        return OrderConfirmationResult(isSuccess = false, returnTarget = "")
+        return OrderConfirmationResult(isSuccess = true, returnTarget = HOME_TARGET)
+    }
+
+    private companion object {
+        const val HOME_TARGET = "Home"
     }
 }
 

@@ -15,7 +15,11 @@ class CartSwipeActionHandler(
      * Purpose: Handles swipe action for product in cart.
      */
     fun handle(productId: String, action: CartSwipeAction) {
-        // RED stage placeholder.
+        when (action) {
+            CartSwipeAction.RIGHT -> cartManager.increase(productId)
+            CartSwipeAction.LEFT -> cartManager.remove(productId)
+            CartSwipeAction.UNKNOWN -> Unit
+        }
     }
 }
 
