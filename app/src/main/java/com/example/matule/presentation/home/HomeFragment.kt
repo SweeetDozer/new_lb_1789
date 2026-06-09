@@ -92,6 +92,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupNavigation(view: View) {
+        view.findViewById<View>(R.id.homeMenuButton).setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_sideMenuFragment)
+        }
+        view.findViewById<View>(R.id.homeBagButton).setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_cartFragment)
+        }
         showAllPopularTextView.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_popularFragment)
         }
@@ -111,7 +117,7 @@ class HomeFragment : Fragment() {
             Toast.makeText(requireContext(), R.string.shop_notification_later, Toast.LENGTH_SHORT).show()
         }
         view.findViewById<View>(R.id.navProfileButton).setOnClickListener {
-            Toast.makeText(requireContext(), R.string.shop_profile_later, Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
         }
     }
 
